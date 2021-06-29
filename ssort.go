@@ -1,4 +1,4 @@
-package main
+package ssort
 
 import (
 	"fmt"
@@ -65,6 +65,7 @@ func sample(data []float64, numProcs int) []float64 {
 	return buckets
 }
 
+// ssortWorker TODO
 func ssortWorker(data, samps []float64, sizes []int, procNum int, sortWg, doneWg *sync.WaitGroup) {
 	minVal := samps[procNum]
 	maxVal := samps[procNum+1]
@@ -92,35 +93,7 @@ func ssortWorker(data, samps []float64, sizes []int, procNum int, sortWg, doneWg
 	}
 
 	doneWg.Done()
-
-	/*
-	out, err := os.OpenFile(fout, os.O_RDWR|os.O_CREATE, 0644)
-	check(err)
-
-	_, err = out.Seek(int64(4+4*start), os.SEEK_SET)
-	check(err)
-
-	for _, val := range binned {
-		_, err = out.Write(Flot32tobytes(val))
-		check(err)
-	}
-
-	err = out.Close()
-	check(err)
-
-	fmt.Printf("%d: start %.04f, count %d\n", pnum, minVal, len(binned))
-	doneWg.Done()
-	*/
 }
-
-func randSlice(size int) []float64 {
-	out := make([]float64, size)
-	for i := 0; i < size; i++ {
-		out[i] = rand.Float64()
-	}
-	return out
-}
-
 
 func main() {
 	test := randSlice(10)
@@ -128,3 +101,4 @@ func main() {
 	Float64s(test)
 	fmt.Println(test)
 }
+
