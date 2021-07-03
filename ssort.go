@@ -95,10 +95,3 @@ func ssortWorker(data, samps []float64, sizes []int, procNum int, sortWg, doneWg
 	doneWg.Done()
 }
 
-func main() {
-	test := randSlice(10)
-	fmt.Println(test)
-	Float64s(test)
-	fmt.Println(test)
-}
-
