@@ -1,7 +1,6 @@
 package ssort
 
 import (
-	"fmt"
 	"math"
 	"math/rand"
 	"sort"
@@ -65,7 +64,8 @@ func sample(data []float64, numProcs int) []float64 {
 	return buckets
 }
 
-// ssortWorker TODO
+// ssortWorker bins the values assigned to this process in a local slice. Once all workers
+// have binned the values, they are combined together into a final sorted list.
 func ssortWorker(data, samps []float64, sizes []int, procNum int, sortWg, doneWg *sync.WaitGroup) {
 	minVal := samps[procNum]
 	maxVal := samps[procNum+1]
